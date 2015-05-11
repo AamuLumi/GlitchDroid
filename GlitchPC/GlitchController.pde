@@ -52,12 +52,13 @@ class GlitchController implements Runnable {
   public void parsePacket(String packet) {
     String[] parsedPacket = packet.split("!");
     if (parsedPacket[0].equals("setValue")){
-      effects[Integer.parseInt(parsedPacket[1])].getActiveParameterX().setValue(Double.parseDouble(parsedPacket[2]));
-      effects[Integer.parseInt(parsedPacket[1])].getActiveParameterY().setValue(Double.parseDouble(parsedPacket[3]));
+      Parameter x = effects[Integer.parseInt(parsedPacket[1])].getActiveParameterX();
+      if (x != null) x.setValue(Double.parseDouble(parsedPacket[2]));
+      Parameter y = effects[Integer.parseInt(parsedPacket[1])].getActiveParameterY();
+      if (y != null) y.setValue(Double.parseDouble(parsedPacket[3]));
     }
     else if (parsedPacket[0].equals("active")){
       effects[Integer.parseInt(parsedPacket[1])].setActive(Boolean.parseBoolean(parsedPacket[2]));
     }
   }
 }
-

@@ -1,6 +1,7 @@
-public final int SERVER_PORT = 34195;
+public final int SERVER_PORT = 34198;
 
 public final color mainColor = #60A917;
+public final color commandBarBackground = #EEEEEE;
 
 public final int commandBarX = 30;
 public final int commandBarY = 15;
@@ -54,5 +55,3 @@ public final int textEffectP2ValueX = textEffectP2TypeX + textEffectP2TypeDX + p
 public final int textEffectP2ValueY = textEffectP2TypeY;
 public final int textEffectP2ValueDX = 40;
 public final int textEffectP2ValueDY = effectPanelSizeElementY;
-
-

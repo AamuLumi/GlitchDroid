@@ -1,3 +1,11 @@
+void drawCommandBarBackground() {
+  fill(commandBarBackground);
+  rect(0, 0, width, commandBarY*2 + buttonPlayDY);
+  
+  fill(#000000);
+  rect(0, commandBarY*2 + buttonPlayDY, width, 3);
+}
+
 void drawButtonPause() {
   noStroke();
   fill(mainColor);
@@ -14,13 +22,20 @@ void drawButtonPlay() {
 
 void drawButtonLoad() {
   noStroke();
-  fill(#FFFFFF);
+  fill(commandBarBackground);
   rectMode(CORNER);
   rect(buttonLoadX, buttonLoadY, buttonLoadDX, buttonLoadDY);
 
   fill(mainColor);
   textFont(robotoThin);
   text("Load", buttonLoadX, buttonLoadY+buttonLoadDY - buttonLoadPaddingFont);
+}
+
+void drawCommandBar(){
+  drawCommandBarBackground();
+  drawButtonPause();
+  drawButtonPlay();
+  drawButtonLoad();
 }
 
 void drawEffects() {
@@ -72,4 +87,3 @@ void drawEffects() {
     }
   }
 }
-

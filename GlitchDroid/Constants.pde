@@ -1,5 +1,9 @@
-final String SERVER_IP = "192.168.0.20";
-final int SERVER_PORT = 34195;
+final String SERVER_IP = "192.168.0.11";
+final int SERVER_PORT = 34198;
+
+final color[] colors = {
+  #F0A303, #1BA1E2, #A4C400, #60A917, #647687, #FA6800, #F472D0, #FFFFFF
+};
 
 int PointerSize = 35;
 int PointerPrecision = 15;

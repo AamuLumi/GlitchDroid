@@ -1,3 +1,25 @@
+void findSpaces() {
+  int indexSpace = 0;  
+  for (int i = 0; i < divisions; i++, indexSpace++) {
+    spaces[indexSpace] = new GlitchSpace( paysageToReal(height * i/divisions, 0), paysageToReal(height * (i+1)/divisions, width/2));
+    spaces[indexSpace].setBackgroundColor(colors[indexSpace]);
+    spaces[indexSpace].setNumGlitchSpace(indexSpace);
+  }
+  for (int i = 0; i < divisions; i++, indexSpace++) {
+    spaces[indexSpace] = new GlitchSpace( paysageToReal(height * i/divisions, width/2), paysageToReal(height * (i+1)/divisions, width));  
+    spaces[indexSpace].setBackgroundColor(colors[indexSpace]);
+    spaces[indexSpace].setNumGlitchSpace(indexSpace);
+  }
+}
+
+GlitchSpace getSpaceForCoordonates(int x, int y) {
+  for (int i = 0; i < spaces.length; i++)
+    if (spaces[i].hasCoord(x, y))
+      return spaces[i];
+
+  return null;
+}
+
 class GlitchSpace {
 
   int x1, y1, x2, y2;
@@ -9,7 +31,7 @@ class GlitchSpace {
 
   private byte numberInputs;
   private int numGlitchSpace;
-  
+
   private double minX, maxX, minY, maxY;
 
   public GlitchSpace(int x1, int y1, int x2, int y2) {
@@ -40,31 +62,31 @@ class GlitchSpace {
     minY = 0;
     maxY = 100;
   }
-  
-  
+
+
   // Why X and Y are switched ?
   // Because value is calculated in initial phone geometrical plan
-  public double getValueY(){
+  public double getValueY() {
     return (pointer.getX() - x1)/(double)(x2 - x1) * (maxX - minX);
   }
-  
-  public double getValueX(){
+
+  public double getValueX() {
     return (pointer.getY() - y1)/(double)(y2 - y1) * (maxY - minY);
   }
-  
-  public void setMinX(double min){
+
+  public void setMinX(double min) {
     this.minX = min;
   }
-  
-  public void setMaxX(double max){
+
+  public void setMaxX(double max) {
     this.maxX = max;
   }
-  
-  public void setMinY(double min){
+
+  public void setMinY(double min) {
     this.minY = min;
   }
-  
-  public void setMaxY(double max){
+
+  public void setMaxY(double max) {
     this.maxY = max;
   }
 
@@ -80,12 +102,12 @@ class GlitchSpace {
     println(c);
     this.bg = c;
   }
-  
-  public int getNumGlitchSpace(){
+
+  public int getNumGlitchSpace() {
     return this.numGlitchSpace;
   }
-  
-  public void setNumGlitchSpace(int i){
+
+  public void setNumGlitchSpace(int i) {
     this.numGlitchSpace = i;
   }
 
@@ -94,6 +116,16 @@ class GlitchSpace {
   }
 
   public void setPointer(Point p) {
+    Point beg = paysageToReal(beginningConfigurationSaveRectX, beginningConfigurationSaveRectY);
+    if (p.getX() < minX)
+      p.setX((int)minX);
+    else if (p.getX() > maxX)
+      p.setX((int)maxX);
+    
+    if (p.getY() < minY)
+      p.setY((int)minY);
+    else if (p.getY() > maxY)
+      p.setY((int)maxY);
     this.pointer = p;
   }
 
@@ -127,8 +159,8 @@ class GlitchSpace {
       (y > pointer.getY() - (PointerSize + PointerPrecision)) &&
       (y < pointer.getY() + (PointerSize + PointerPrecision));
   }
-  
-  public boolean isOnSaveRect(int x, int y){
+
+  public boolean isOnSaveRect(int x, int y) {
     return (x > beginningConfigurationSaveRectX) &&
       (x < endConfigurationSaveRectX) &&
       (y < beginningConfigurationSaveRectY) &&

@@ -9,6 +9,7 @@ class TCPClient implements Runnable {
   public void run() {
     try {
       InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
+      println("Create Socket");
       s = new Socket(serverAddr, SERVER_PORT);
       println("Start socket");
       out = new PrintWriter(new BufferedWriter( new OutputStreamWriter(s.getOutputStream())), true);
