@@ -23,8 +23,24 @@ void defineEffects() {
   effects[2].addParameter("Gain", -50, 50, 0, 0, "setValue");
   effects[2].setActiveParameterX("Gain");
   mp.addEffect(effects[2]);
+  
+  Repeater r = new Repeater(1.0, 0);
+  effects[3] = new Effect("Repeater", r);
+  effects[3].addParameter("Time", 0, 1, 0.5, 0, "setRepeaterTime");
+  effects[3].setActiveParameterX("Time");
+  effects[3].addParameter("Mix", 0, 1, 0.5, 0, "setMixPercent");
+  effects[3].setActiveParameterY("Mix");
+  mp.addEffect(effects[3]);
+  
+  Gate gate = new Gate(1.0, 0);
+  effects[4] = new Effect("Gate", gate);
+  effects[4].addParameter("Time", 0, 1, 0.5, 0, "setTime");
+  effects[4].setActiveParameterX("Time");
+  effects[4].addParameter("Mix", 0, 1, 0.5, 0, "setMixPercent");
+  effects[4].setActiveParameterY("Mix");
+  mp.addEffect(effects[4]);
 
-  for (int i = 3; i < 8; i++) {
+  for (int i = 5; i < 8; i++) {
     effects[i] = new Effect("None", null);
   }
 }

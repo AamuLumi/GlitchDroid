@@ -133,13 +133,13 @@ class Parameter {
     setUGenValue((float)this.value);
   }
 
-  public void setValue(double value) {
+  public synchronized void setValue(double value) {
     float trueValue = (float)((value / (100/(max-min))) + min);
     if (isActivated) {
       this.value = trueValue;
       setUGenValue((float)this.value);
     } else
-      this.value = alternativeValue;
+      this.alternativeValue = trueValue;
   }
   
   public void setUGenValue(float value){
@@ -170,12 +170,13 @@ class Parameter {
     return this.type;
   }
 
-  public void switchActivate() {
+  public synchronized void switchActivate() {
     double tmp = alternativeValue;
     alternativeValue = value;
     value = tmp;
     
-    setUGenValue((float)value);
     isActivated = !isActivated;
+    
+    setUGenValue((float)value);
   }
 }

@@ -116,16 +116,15 @@ class GlitchSpace {
   }
 
   public void setPointer(Point p) {
-    Point beg = paysageToReal(beginningConfigurationSaveRectX, beginningConfigurationSaveRectY);
-    if (p.getX() < minX)
-      p.setX((int)minX);
-    else if (p.getX() > maxX)
-      p.setX((int)maxX);
+    if (p.getX() < x1)
+      p.setX(x1);
+    else if (p.getX() > x2)
+      p.setX(x2);
     
-    if (p.getY() < minY)
-      p.setY((int)minY);
-    else if (p.getY() > maxY)
-      p.setY((int)maxY);
+    if (p.getY() < y1)
+      p.setY(y1);
+    else if (p.getY() > y2)
+      p.setY(y2);
     this.pointer = p;
   }
 
